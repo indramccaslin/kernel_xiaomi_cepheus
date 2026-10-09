@@ -50,6 +50,7 @@ jobs:
           export CROSS_COMPILE=aarch64-linux-gnu-
           export CROSS_COMPILE_ARM32=arm-linux-gnueabihf-
           sed -i 's/HOSTLDLIBS_dtc/HOSTLOADLIBES_dtc/' scripts/dtc/Makefile
+          sed -i 's#python2 $(srctree)/scripts/dtc/mkdtboimg.py#python3 $(srctree)/scripts/dtc/mkdtboimg.py#' scripts/Makefile.lib
           printf '\nKBUILD_CFLAGS += -Wno-error\nKBUILD_CFLAGS += -Wno-error=default-const-init-var-unsafe\nKBUILD_CFLAGS += -Wno-default-const-init-var-unsafe\n' >> Makefile
           make O=out ARCH=arm64 cepheus_defconfig
           make -j"$(nproc --all)" O=out ARCH=arm64 \
