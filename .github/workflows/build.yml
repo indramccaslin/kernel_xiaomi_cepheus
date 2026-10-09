@@ -16,10 +16,12 @@ jobs:
 
       - name: Fetch submodules (KernelSU-Next + AnyKernel)
         run: |
-          git clone https://github.com/KernelSU-Next/KernelSU-Next.git KernelSU-Next
-          git -C KernelSU-Next checkout 00cb93e0bc8bf3ca3680c7e8a3d7cf11d0b59071
-          git clone https://github.com/raystef66/AnyKernel.git AnyKernel3
-          git -C AnyKernel3 checkout e13ad11daec64ff512c86622a93d2010902287f6
+          curl -L "https://codeload.github.com/KernelSU-Next/KernelSU-Next/tar.gz/00cb93e0bc8bf3ca3680c7e8a3d7cf11d0b59071" -o /tmp/ksun.tgz
+          mkdir -p KernelSU-Next && tar xzf /tmp/ksun.tgz -C KernelSU-Next --strip-components=1
+          curl -L "https://codeload.github.com/raystef66/AnyKernel/tar.gz/e13ad11daec64ff512c86622a93d2010902287f6" -o /tmp/ak.tgz
+          mkdir -p AnyKernel3 && tar xzf /tmp/ak.tgz -C AnyKernel3 --strip-components=1
+          ls -la KernelSU-Next | head
+          ls -la AnyKernel3 | head
 
       - name: Install dependencies
         run: |
